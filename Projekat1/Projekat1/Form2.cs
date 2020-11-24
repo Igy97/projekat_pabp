@@ -166,6 +166,13 @@ namespace Projekat1
 
         }
 
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int id =(int)dataGridView1.CurrentRow.Cells["OrderID"].Value;
+            Form4 f4 = new Form4(this.dataSet, id);
+            f4.Show();
+        }
+
         //TODO: Add new form for Order, double click on orders detail
 
     }

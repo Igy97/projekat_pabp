@@ -286,6 +286,7 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(774, 143);
             this.dataGridView1.TabIndex = 8;
+            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
             // OrderID
             // 
@@ -333,9 +334,9 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(18, 351);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(138, 25);
+            this.label5.Size = new System.Drawing.Size(261, 25);
             this.label5.TabIndex = 9;
-            this.label5.Text = "Porudzbine:";
+            this.label5.Text = "Detalji o porudzbinama:";
             // 
             // order_DetailsTableAdapter
             // 
