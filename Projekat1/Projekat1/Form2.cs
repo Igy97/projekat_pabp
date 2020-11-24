@@ -93,9 +93,9 @@ namespace Projekat1
                     unitPriceFilter = Convert.ToDouble(textBox1.Text);
                     filtersForProducts();
                 }
-                catch (Exception error)
+                catch
                 {
-                    MessageBox.Show(error.StackTrace);
+                    MessageBox.Show("Filter nije validan, koristite brojeve!");
                     textBox1.Text = "";
                     unitPriceFilter = -1;
                 }
@@ -118,7 +118,7 @@ namespace Projekat1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form3 f3 = new Form3(this.dataSet, true, -1);
+            Form3 f3 = new Form3(this.dataSet, true, 0);
             f3.Show();
         }
 
@@ -147,6 +147,10 @@ namespace Projekat1
             {
                 productsDataGridView.Rows.RemoveAt(productsDataGridView.CurrentRow.Index);
                 productsBindingSource.EndEdit();
+                if(productsDataGridView.Rows.Count -1 > 0)
+                {
+                    productsDataGridView.Rows[0].Selected = true;
+                }
 
             }
         }
@@ -158,12 +162,11 @@ namespace Projekat1
                 productsTableAdapter.Update(dataSet);
                 MessageBox.Show("Baza je azurirana!");
             }
-            catch(Exception error)
+            catch
             {
-                MessageBox.Show(error.StackTrace);
+                MessageBox.Show("Baza nije azurirana!");
             }
             
-
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -172,8 +175,6 @@ namespace Projekat1
             Form4 f4 = new Form4(this.dataSet, id);
             f4.Show();
         }
-
-        //TODO: Add new form for Order, double click on orders detail
 
     }
 }

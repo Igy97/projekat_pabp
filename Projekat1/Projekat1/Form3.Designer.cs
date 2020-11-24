@@ -42,7 +42,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.northwindDataSet = new Projekat1.NorthwindDataSet();
             this.productsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.productsTableAdapter = new Projekat1.NorthwindDataSetTableAdapters.ProductsTableAdapter();
             this.productIDTextBox = new System.Windows.Forms.TextBox();
             this.productNameTextBox = new System.Windows.Forms.TextBox();
             this.quantityPerUnitTextBox = new System.Windows.Forms.TextBox();
@@ -53,8 +52,10 @@
             this.discontinuedCheckBox = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.categoryIDTextBox = new System.Windows.Forms.TextBox();
-            this.supplierIDTextBox = new System.Windows.Forms.TextBox();
+            this.supplierIDComboBox = new System.Windows.Forms.ComboBox();
+            this.categoryIDComboBox = new System.Windows.Forms.ComboBox();
+            this.supplierBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.categoryBindingSource = new System.Windows.Forms.BindingSource(this.components);
             productIDLabel = new System.Windows.Forms.Label();
             productNameLabel = new System.Windows.Forms.Label();
             quantityPerUnitLabel = new System.Windows.Forms.Label();
@@ -67,6 +68,8 @@
             categoryIDLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.northwindDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // productIDLabel
@@ -161,10 +164,6 @@
             this.productsBindingSource.DataMember = "Products";
             this.productsBindingSource.DataSource = this.northwindDataSet;
             // 
-            // productsTableAdapter
-            // 
-            this.productsTableAdapter.ClearBeforeFill = true;
-            // 
             // productIDTextBox
             // 
             this.productIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.productsBindingSource, "ProductID", true));
@@ -255,52 +254,68 @@
             // supplierIDLabel
             // 
             supplierIDLabel.AutoSize = true;
-            supplierIDLabel.Location = new System.Drawing.Point(31, 78);
+            supplierIDLabel.Location = new System.Drawing.Point(32, 78);
             supplierIDLabel.Name = "supplierIDLabel";
             supplierIDLabel.Size = new System.Drawing.Size(62, 13);
-            supplierIDLabel.TabIndex = 27;
+            supplierIDLabel.TabIndex = 44;
             supplierIDLabel.Text = "Supplier ID:";
+            // 
+            // supplierIDComboBox
+            // 
+            this.supplierIDComboBox.DataSource = this.supplierBindingSource;
+            this.supplierIDComboBox.DisplayMember = "CompanyName";
+            this.supplierIDComboBox.FormattingEnabled = true;
+            this.supplierIDComboBox.Location = new System.Drawing.Point(127, 75);
+            this.supplierIDComboBox.Name = "supplierIDComboBox";
+            this.supplierIDComboBox.Size = new System.Drawing.Size(104, 21);
+            this.supplierIDComboBox.TabIndex = 45;
+            this.supplierIDComboBox.ValueMember = "SupplierID";
             // 
             // categoryIDLabel
             // 
             categoryIDLabel.AutoSize = true;
-            categoryIDLabel.Location = new System.Drawing.Point(31, 104);
+            categoryIDLabel.Location = new System.Drawing.Point(32, 105);
             categoryIDLabel.Name = "categoryIDLabel";
             categoryIDLabel.Size = new System.Drawing.Size(66, 13);
-            categoryIDLabel.TabIndex = 29;
+            categoryIDLabel.TabIndex = 45;
             categoryIDLabel.Text = "Category ID:";
             // 
-            // categoryIDTextBox
+            // categoryIDComboBox
             // 
-            this.categoryIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.productsBindingSource, "CategoryID", true));
-            this.categoryIDTextBox.Location = new System.Drawing.Point(127, 101);
-            this.categoryIDTextBox.Name = "categoryIDTextBox";
-            this.categoryIDTextBox.Size = new System.Drawing.Size(104, 20);
-            this.categoryIDTextBox.TabIndex = 30;
+            this.categoryIDComboBox.DataSource = this.categoryBindingSource;
+            this.categoryIDComboBox.DisplayMember = "CategoryName";
+            this.categoryIDComboBox.FormattingEnabled = true;
+            this.categoryIDComboBox.Location = new System.Drawing.Point(127, 102);
+            this.categoryIDComboBox.Name = "categoryIDComboBox";
+            this.categoryIDComboBox.Size = new System.Drawing.Size(104, 21);
+            this.categoryIDComboBox.TabIndex = 46;
+            this.categoryIDComboBox.ValueMember = "CategoryID";
             // 
-            // supplierIDTextBox
+            // supplierBindingSource
             // 
-            this.supplierIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.productsBindingSource, "SupplierID", true));
-            this.supplierIDTextBox.Location = new System.Drawing.Point(127, 75);
-            this.supplierIDTextBox.Name = "supplierIDTextBox";
-            this.supplierIDTextBox.Size = new System.Drawing.Size(104, 20);
-            this.supplierIDTextBox.TabIndex = 28;
+            this.supplierBindingSource.DataMember = "Suppliers";
+            this.supplierBindingSource.DataSource = this.northwindDataSet;
+            // 
+            // categoryBindingSource
+            // 
+            this.categoryBindingSource.DataMember = "Categories";
+            this.categoryBindingSource.DataSource = this.northwindDataSet;
             // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(297, 390);
+            this.ClientSize = new System.Drawing.Size(289, 390);
+            this.Controls.Add(categoryIDLabel);
+            this.Controls.Add(this.categoryIDComboBox);
+            this.Controls.Add(supplierIDLabel);
+            this.Controls.Add(this.supplierIDComboBox);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.label2);
             this.Controls.Add(productIDLabel);
             this.Controls.Add(this.productIDTextBox);
             this.Controls.Add(productNameLabel);
             this.Controls.Add(this.productNameTextBox);
-            this.Controls.Add(supplierIDLabel);
-            this.Controls.Add(this.supplierIDTextBox);
-            this.Controls.Add(categoryIDLabel);
-            this.Controls.Add(this.categoryIDTextBox);
             this.Controls.Add(quantityPerUnitLabel);
             this.Controls.Add(this.quantityPerUnitTextBox);
             this.Controls.Add(unitPriceLabel);
@@ -321,6 +336,8 @@
             this.Load += new System.EventHandler(this.Form3_Load);
             ((System.ComponentModel.ISupportInitialize)(this.northwindDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.supplierBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoryBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -330,7 +347,6 @@
         private System.Windows.Forms.Button button1;
         private NorthwindDataSet northwindDataSet;
         private System.Windows.Forms.BindingSource productsBindingSource;
-        private NorthwindDataSetTableAdapters.ProductsTableAdapter productsTableAdapter;
         private System.Windows.Forms.TextBox productIDTextBox;
         private System.Windows.Forms.TextBox productNameTextBox;
         private System.Windows.Forms.TextBox quantityPerUnitTextBox;
@@ -341,7 +357,9 @@
         private System.Windows.Forms.CheckBox discontinuedCheckBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox categoryIDTextBox;
-        private System.Windows.Forms.TextBox supplierIDTextBox;
+        private System.Windows.Forms.ComboBox supplierIDComboBox;
+        private System.Windows.Forms.ComboBox categoryIDComboBox;
+        private System.Windows.Forms.BindingSource supplierBindingSource;
+        private System.Windows.Forms.BindingSource categoryBindingSource;
     }
 }

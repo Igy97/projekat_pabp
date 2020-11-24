@@ -27,18 +27,31 @@ namespace Projekat1
             InitializeComponent();
             this.dataSet = dataSet;
             productsBindingSource.DataSource = this.dataSet;
+            supplierBindingSource.DataSource = this.dataSet;
+            categoryBindingSource.DataSource = this.dataSet;
             this.productID = id;
-            productsBindingSource.Filter = "ProductID =" + this.productID;
             this.dodavanjeForma = dodavanjeForma;
+            productsBindingSource.Filter = "ProductID =" + this.productID;
             if (this.dodavanjeForma)
             {
+                productIDTextBox.DataBindings.Clear();
                 this.Text = "Dodavanje";
-                button1.Text = "Dodaj";
+                button1.Text = "Dodaj";        
             }
             else
-            {           
+            {      
                 this.Text = "Izmena";
-                button1.Text = "Izmeni";  
+                button1.Text = "Izmeni";
+
+                productsBindingSource.MoveFirst();
+                NorthwindDataSet.ProductsRow row = (NorthwindDataSet.ProductsRow)((DataRowView)productsBindingSource.Current).Row;
+                int supplierID = (int)row.SupplierID;
+                int categoryID = (int)row.CategoryID;
+                int indexSupplier = supplierBindingSource.Find("SupplierID", supplierID);
+                int indexCategory = categoryBindingSource.Find("CategoryID", categoryID);
+                supplierIDComboBox.SelectedIndex = indexSupplier;
+                categoryIDComboBox.SelectedIndex = indexCategory;
+                
             }
         }
 
@@ -75,8 +88,8 @@ namespace Projekat1
                 {
                     NorthwindDataSet.ProductsRow row = this.dataSet.Products.NewProductsRow();                 
                     row.ProductName = productNameTextBox.Text;
-                    row.SupplierID = int.Parse(supplierIDTextBox.Text);
-                    row.CategoryID = int.Parse(categoryIDTextBox.Text);
+                    row.SupplierID = int.Parse(supplierIDComboBox.SelectedValue.ToString());
+                    row.CategoryID = int.Parse(categoryIDComboBox.SelectedValue.ToString());
                     row.QuantityPerUnit = quantityPerUnitTextBox.Text;
                     row.UnitPrice = decimal.Parse(unitPriceTextBox.Text);
                     row.UnitsInStock = short.Parse(unitsInStockTextBox.Text);
@@ -85,19 +98,25 @@ namespace Projekat1
                     row.Discontinued = discontinuedCheckBox.Checked;
                     this.dataSet.Products.AddProductsRow(row);
                 }
+                else
+                {
+                    NorthwindDataSet.ProductsRow row = (NorthwindDataSet.ProductsRow)((DataRowView)productsBindingSource.Current).Row;
+                    row.SupplierID = int.Parse(supplierIDComboBox.SelectedValue.ToString());
+                    row.CategoryID = int.Parse(categoryIDComboBox.SelectedValue.ToString());
+                }
                 azuriranjeBaze = true;
                 this.Close();
             }
-            catch (Exception error)
+            catch 
             {
-                MessageBox.Show(error.StackTrace);
+                MessageBox.Show("Parametri nisu validni!");
             }
            
         }
 
         private void Form3_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(azuriranjeBaze)
+            if (azuriranjeBaze)
             {
                 productsBindingSource.EndEdit();
                 MessageBox.Show("Izmena uradjena!");

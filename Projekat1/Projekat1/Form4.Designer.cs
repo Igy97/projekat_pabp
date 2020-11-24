@@ -109,6 +109,7 @@
             this.ordersDataGridView.DataSource = this.ordersBindingSource;
             this.ordersDataGridView.Location = new System.Drawing.Point(12, 78);
             this.ordersDataGridView.Name = "ordersDataGridView";
+            this.ordersDataGridView.ReadOnly = true;
             this.ordersDataGridView.Size = new System.Drawing.Size(769, 271);
             this.ordersDataGridView.TabIndex = 1;
             // 
